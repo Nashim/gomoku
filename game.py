@@ -35,12 +35,12 @@ class Game():
         player = self.board[tuple(move)]
         vectors = np.array([[1, 0], [0, 1], [1, 1], [1, -1]])
         for vec in vectors:
-            count = 0
+            count = 1
             for dir in [-1, 1]:
                 for i in range(1, 5):
-                    next_move = tuple(move + i * dir * vec)
-                    if next_move in np.ndindex(self.board.shape):
-                        if self.board[next_move] == player:
+                    next_move = np.array(move + i * dir * vec)
+                    if np.all(next_move >= 0) and np.all(next_move < BOARD_SIZE):
+                        if self.board[tuple(next_move)] == player:
                             count += 1
                         else:
                             break
